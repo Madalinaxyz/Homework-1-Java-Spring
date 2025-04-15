@@ -76,12 +76,13 @@ public class Client {
         repository.update(this);
     }
 
-    public void setAccounts(Set<AbstractAccount> accounts) {
+    public void setAccounts(List<AbstractAccount> accounts) {
 
-        this.accounts.clear();
-        this.accounts.addAll(accounts);
-
-        repository.update(this);
+//        this.accounts.clear();
+//        this.accounts.addAll(accounts);
+//
+//        repository.update(this);
+        this.accounts=accounts;
     }
 
     public List<AbstractAccount> getAccounts() {

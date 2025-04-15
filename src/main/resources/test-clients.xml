@@ -1,0 +1,41 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="application-context.xml"/>
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="location" value="clients.properties"/>
+    </bean>
+    <bean id="savingAccount1" class="com.luxoft.bankapp.model.SavingAccount">
+        <constructor-arg value="${savingAccount1.balance}"/>
+    </bean>
+    <bean id="checkingAccount1" class="com.luxoft.bankapp.model.CheckingAccount">
+        <constructor-arg value="${checkingAccount1.overdraft}"/>
+    </bean>
+    <bean id="genderMale" class="com.luxoft.bankapp.model.Client$Gender" factory-method="valueOf">
+        <constructor-arg value="MALE"/>
+    </bean>
+    <bean id="client1" class="com.luxoft.bankapp.model.Client">
+        <constructor-arg value="${client1}"/>
+        <constructor-arg ref="genderMale"/>
+        <property name="city" value="${client1.city}"/>
+        <property name="repository" ref="repository"/>
+        <property name="accounts">
+            <list>
+                <ref bean="savingAccount1"/>
+                <ref bean="checkingAccount1"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="checkingAccount2" class="com.luxoft.bankapp.model.CheckingAccount">
+        <constructor-arg value="${checkingAccount2.overdraft}"/>
+    </bean>
+    <bean id="client2" class="com.luxoft.bankapp.model.Client">
+        <constructor-arg name="name" value="${client2}"/>
+        <constructor-arg name="gender" ref="genderMale"/>
+        <property name="city" value="${client2.city}"/>
+        <property name="repository" ref="repository"/>
+        <property name="accounts">
+            <list>
+                <ref bean="checkingAccount2"/>
+            </list>
+        </property>
+    </bean>
+</beans>
