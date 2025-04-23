@@ -1,8 +1,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="application-context.xml"/>
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="location" value="clients.properties"/>
     </bean>
+    <bean id="repository" class="com.luxoft.bankapp.service.storage.MapClientRepository" />
+
+    <bean id="banking" class="com.luxoft.bankapp.service.BankingImpl" autowire="byType"/>
+
+    <bean id="bankReport" class="com.luxoft.bankapp.service.BankReportServiceImpl">
+        <property name="repository" ref="repository"/>
+    </bean>
+
     <bean id="savingAccount1" class="com.luxoft.bankapp.model.SavingAccount">
         <constructor-arg value="${savingAccount1.balance}"/>
     </bean>
@@ -38,4 +45,5 @@
             </list>
         </property>
     </bean>
+
 </beans>

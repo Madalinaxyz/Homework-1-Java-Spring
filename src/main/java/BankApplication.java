@@ -9,8 +9,13 @@ import com.luxoft.bankapp.service.Banking;
 import com.luxoft.bankapp.model.Client.Gender;
 import com.luxoft.bankapp.service.storage.ClientRepository;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@ComponentScan("com.luxoft.bankapp")
+@Configuration
 public class BankApplication {
 
     private static final String[] CLIENT_NAMES =
@@ -20,7 +25,7 @@ public class BankApplication {
 
 //        ClientRepository repository = new MapClientRepository();
 //        Banking banking = initialize(repository);
-            ApplicationContext context=new ClassPathXmlApplicationContext("test-clients.xml");
+            ApplicationContext context = new AnnotationConfigApplicationContext(BankApplication.class);
             Banking banking = initialize(context);
 
 
